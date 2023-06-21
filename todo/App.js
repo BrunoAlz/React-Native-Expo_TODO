@@ -1,6 +1,13 @@
 import { useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, Button, TextInput } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  TextInput,
+  ScrollView,
+} from "react-native";
 
 export default function App() {
   const [inputText, setInputText] = useState("");
@@ -25,13 +32,16 @@ export default function App() {
         <Button title="Adicionar" onPress={addObjectiveHandler} />
       </View>
       <View style={styles.listContainer}>
-        <Text>Objetivos Atuais:</Text>
-        {list.map((item) => (
-          <View key={Math.random()} style={styles.listItens}>
-            <Text style={styles.listText}>{item}</Text>
-          </View>
-        ))}
+        <ScrollView>
+          <Text>Objetivos Atuais:</Text>
+          {list.map((item) => (
+            <View key={Math.random()} style={styles.listItens}>
+              <Text style={styles.listText}>{item}</Text>
+            </View>
+          ))}
+        </ScrollView>
       </View>
+
       <StatusBar style="auto" />
     </View>
   );
@@ -64,6 +74,7 @@ const styles = StyleSheet.create({
 
   listContainer: {
     flex: 5,
+    marginBottom: 20,
   },
 
   listItens: {
