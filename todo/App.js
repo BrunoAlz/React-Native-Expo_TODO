@@ -1,12 +1,27 @@
+import { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, Button, TextInput } from "react-native";
 
 export default function App() {
+  const [inputText, setInputText] = useState("");
+
+  function objectiveInputHandler(enteredText) {
+    setInputText(enteredText);
+  }
+
+  function addObjectiveHandler() {
+    console.log(inputText);
+  }
+
   return (
     <View style={styles.appContainer}>
       <View style={styles.inputContainer}>
-        <TextInput style={styles.textInput} placeholder="Insira um Objetivo" />
-        <Button title="Adicionar" />
+        <TextInput
+          style={styles.textInput}
+          placeholder="Insira um Objetivo"
+          onChangeText={objectiveInputHandler}
+        />
+        <Button title="Adicionar" onPress={addObjectiveHandler} />
       </View>
       <View style={styles.listContainer}>
         <Text>Objetivos Atuais:</Text>
