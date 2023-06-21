@@ -6,9 +6,10 @@ import {
   View,
   Button,
   TextInput,
-  ScrollView,
   FlatList,
 } from "react-native";
+
+import Item from "./components/Item";
 
 export default function App() {
   const [inputText, setInputText] = useState("");
@@ -40,11 +41,7 @@ export default function App() {
         <FlatList
           data={list}
           renderItem={(itemData) => {
-            return (
-              <View style={styles.listItens}>
-                <Text style={styles.listText}>{itemData.item.text}</Text>
-              </View>
-            );
+            return <Item text={itemData.item.text} />;
           }}
         />
       </View>
@@ -82,17 +79,5 @@ const styles = StyleSheet.create({
   listContainer: {
     flex: 5,
     marginBottom: 20,
-  },
-
-  listItens: {
-    margin: 5,
-    padding: 8,
-    borderRadius: 4,
-    backgroundColor: "#5e0acc",
-    fontSize: 18,
-  },
-
-  listText: {
-    color: "white",
   },
 });
