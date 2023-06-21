@@ -4,13 +4,14 @@ import { StyleSheet, Text, View, Button, TextInput } from "react-native";
 
 export default function App() {
   const [inputText, setInputText] = useState("");
+  const [list, setList] = useState([]);
 
   function objectiveInputHandler(enteredText) {
     setInputText(enteredText);
   }
 
   function addObjectiveHandler() {
-    console.log(inputText);
+    setList((currentList) => [...currentList, inputText]);
   }
 
   return (
@@ -25,6 +26,11 @@ export default function App() {
       </View>
       <View style={styles.listContainer}>
         <Text>Objetivos Atuais:</Text>
+        {list.map((item) => (
+          <View key={Math.random()} style={styles.listItens}>
+            <Text style={styles.listText}>{item}</Text>
+          </View>
+        ))}
       </View>
       <StatusBar style="auto" />
     </View>
@@ -57,6 +63,18 @@ const styles = StyleSheet.create({
   },
 
   listContainer: {
-    flex: 4,
+    flex: 5,
+  },
+
+  listItens: {
+    margin: 5,
+    padding: 8,
+    borderRadius: 4,
+    backgroundColor: "#5e0acc",
+    fontSize: 18,
+  },
+
+  listText: {
+    color: "white",
   },
 });
