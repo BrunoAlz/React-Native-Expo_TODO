@@ -7,6 +7,7 @@ import {
   Button,
   TextInput,
   ScrollView,
+  FlatList,
 } from "react-native";
 
 export default function App() {
@@ -18,7 +19,10 @@ export default function App() {
   }
 
   function addObjectiveHandler() {
-    setList((currentList) => [...currentList, inputText]);
+    setList((currentList) => [
+      ...currentList,
+      { text: inputText, key: Math.random().toString() },
+    ]);
   }
 
   return (
@@ -32,14 +36,17 @@ export default function App() {
         <Button title="Adicionar" onPress={addObjectiveHandler} />
       </View>
       <View style={styles.listContainer}>
-        <ScrollView>
-          <Text>Objetivos Atuais:</Text>
-          {list.map((item) => (
-            <View key={Math.random()} style={styles.listItens}>
-              <Text style={styles.listText}>{item}</Text>
-            </View>
-          ))}
-        </ScrollView>
+        <Text>Objetivos Atuais:</Text>
+        <FlatList
+          data={list}
+          renderItem={(itemData) => {
+            return (
+              <View style={styles.listItens}>
+                <Text style={styles.listText}>{itemData.item.text}</Text>
+              </View>
+            );
+          }}
+        />
       </View>
 
       <StatusBar style="auto" />
