@@ -1,12 +1,17 @@
 import { useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, FlatList } from "react-native";
+import { StyleSheet, Text, View, FlatList, Button } from "react-native";
 
 import Item from "./components/Item";
 import InputText from "./components/TextInput";
 
 export default function App() {
+  const [modalIsVisible, setModalIsVisible] = useState(false);
   const [list, setList] = useState([]);
+
+  function startAddGoalHander() {
+    setModalIsVisible(true);
+  }
 
   function addObjectiveHandler(enteredText) {
     setList((currentList) => [
@@ -23,9 +28,15 @@ export default function App() {
 
   return (
     <View style={styles.appContainer}>
-      <InputText onAddGoal={addObjectiveHandler} />
+      <Button
+        title="Adicionar"
+        color={"#5e0acc"}
+        onPress={startAddGoalHander}
+      />
+      {modalIsVisible && (
+        <InputText visible={modalIsVisible} onAddGoal={addObjectiveHandler} />
+      )}
       <View style={styles.listContainer}>
-        <Text>Objetivos Atuais:</Text>
         <FlatList
           data={list}
           renderItem={(itemData) => {

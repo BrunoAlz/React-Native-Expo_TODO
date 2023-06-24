@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, View, Button, TextInput } from "react-native";
+import { StyleSheet, View, Button, TextInput, Modal } from "react-native";
 
 export default function InputText(props) {
   const [inputText, setInputText] = useState("");
@@ -9,14 +9,16 @@ export default function InputText(props) {
   }
 
   return (
-    <View style={styles.inputContainer}>
-      <TextInput
-        style={styles.textInput}
-        placeholder="Insira um Objetivo"
-        onChangeText={objectiveInputHandler}
-      />
-      <Button title="Adicionar" onPress={() => props.onAddGoal(inputText)} />
-    </View>
+    <Modal visible={props.visible} animationType="slide">
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.textInput}
+          placeholder="Insira um Objetivo"
+          onChangeText={objectiveInputHandler}
+        />
+        <Button title="Adicionar" onPress={() => props.onAddGoal(inputText)} />
+      </View>
+    </Modal>
   );
 }
 
