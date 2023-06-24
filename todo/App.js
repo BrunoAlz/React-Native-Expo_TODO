@@ -10,32 +10,22 @@ import {
 } from "react-native";
 
 import Item from "./components/Item";
+import InputText from "./components/TextInput";
 
 export default function App() {
-  const [inputText, setInputText] = useState("");
   const [list, setList] = useState([]);
 
-  function objectiveInputHandler(enteredText) {
-    setInputText(enteredText);
-  }
 
-  function addObjectiveHandler() {
+  function addObjectiveHandler(enteredText) {
     setList((currentList) => [
       ...currentList,
-      { text: inputText, key: Math.random().toString() },
+      { text: enteredText, key: Math.random().toString() },
     ]);
   }
 
   return (
     <View style={styles.appContainer}>
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.textInput}
-          placeholder="Insira um Objetivo"
-          onChangeText={objectiveInputHandler}
-        />
-        <Button title="Adicionar" onPress={addObjectiveHandler} />
-      </View>
+      <InputText onAddGoal={addObjectiveHandler} />
       <View style={styles.listContainer}>
         <Text>Objetivos Atuais:</Text>
         <FlatList
