@@ -16,7 +16,18 @@ export default function InputText(props) {
           placeholder="Insira um Objetivo"
           onChangeText={objectiveInputHandler}
         />
-        <Button title="Adicionar" onPress={() => props.onAddGoal(inputText)} />
+
+        <View style={styles.buttonContainer}>
+          <View style={styles.button}>
+            <Button
+              title="Adicionar"
+              onPress={() => props.onAddGoal(inputText)}
+            />
+          </View>
+          <View style={styles.button}>
+            <Button title="Cancelar" />
+          </View>
+        </View>
       </View>
     </Modal>
   );
@@ -25,10 +36,9 @@ export default function InputText(props) {
 const styles = StyleSheet.create({
   inputContainer: {
     flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
+    padding: 16,
+    justifyContent: "center",
     alignItems: "center",
-    marginBottom: 24,
     borderBottomWidth: 1,
     borderBottomColor: "#cccfff",
   },
@@ -36,8 +46,18 @@ const styles = StyleSheet.create({
   textInput: {
     borderWidth: 1,
     borderColor: "#cccccc",
-    width: "70%",
+    width: "100%",
     marginRight: 8,
     padding: 8,
+    marginBottom: 8
   },
+
+  buttonContainer: {
+    flexDirection: "row"
+  },
+
+  button: {
+    width: '40%',
+    marginHorizontal: 8
+  }
 });
