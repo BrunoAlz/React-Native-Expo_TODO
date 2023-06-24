@@ -25,7 +25,7 @@ export default function InputText(props) {
             />
           </View>
           <View style={styles.button}>
-            <Button title="Cancelar" />
+            <Button title="Cancelar" onPress={props.onCancel} />
           </View>
         </View>
       </View>
@@ -49,15 +49,15 @@ const styles = StyleSheet.create({
     width: "100%",
     marginRight: 8,
     padding: 8,
-    marginBottom: 8
+    marginBottom: 8,
   },
 
   buttonContainer: {
-    flexDirection: "row"
+    flexDirection: "row",
   },
 
   button: {
-    width: '40%',
-    marginHorizontal: 8
-  }
+    width: "40%",
+    marginHorizontal: 8,
+  },
 });
