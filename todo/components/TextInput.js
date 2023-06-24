@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, View, Button, TextInput, Modal } from "react-native";
+import { StyleSheet, View, Button, TextInput, Modal, Image } from "react-native";
 
 export default function InputText(props) {
   const [inputText, setInputText] = useState("");
@@ -11,6 +11,7 @@ export default function InputText(props) {
   return (
     <Modal visible={props.visible} animationType="slide">
       <View style={styles.inputContainer}>
+        <Image style={styles.image} source={require('../assets/icon.png')}/>
         <TextInput
           style={styles.textInput}
           placeholder="Insira um Objetivo"
@@ -39,8 +40,6 @@ const styles = StyleSheet.create({
     padding: 16,
     justifyContent: "center",
     alignItems: "center",
-    borderBottomWidth: 1,
-    borderBottomColor: "#cccfff",
   },
 
   textInput: {
@@ -50,6 +49,12 @@ const styles = StyleSheet.create({
     marginRight: 8,
     padding: 8,
     marginBottom: 8,
+  },
+
+  image:{
+    width: 100,
+    height: 100,
+    margin: 20
   },
 
   buttonContainer: {
