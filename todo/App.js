@@ -1,13 +1,6 @@
 import { useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  TextInput,
-  FlatList,
-} from "react-native";
+import { StyleSheet, Text, View, FlatList } from "react-native";
 
 import Item from "./components/Item";
 import InputText from "./components/TextInput";
@@ -15,12 +8,17 @@ import InputText from "./components/TextInput";
 export default function App() {
   const [list, setList] = useState([]);
 
-
   function addObjectiveHandler(enteredText) {
     setList((currentList) => [
       ...currentList,
-      { text: enteredText, key: Math.random().toString() },
+      { text: enteredText, id: Math.random().toString() },
     ]);
+  }
+
+  function deleteObjective(id) {
+    setList((currentList) => {
+      return currentList.filter((objective) => objective.id !== id);
+    });
   }
 
   return (
@@ -31,7 +29,13 @@ export default function App() {
         <FlatList
           data={list}
           renderItem={(itemData) => {
-            return <Item text={itemData.item.text} />;
+            return (
+              <Item
+                text={itemData.item.text}
+                id={itemData.item.id}
+                onDeleteItem={deleteObjective}
+              />
+            );
           }}
         />
       </View>
@@ -47,25 +51,6 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     paddingHorizontal: 16,
   },
-
-  inputContainer: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 24,
-    borderBottomWidth: 1,
-    borderBottomColor: "#cccfff",
-  },
-
-  textInput: {
-    borderWidth: 1,
-    borderColor: "#cccccc",
-    width: "70%",
-    marginRight: 8,
-    padding: 8,
-  },
-
   listContainer: {
     flex: 5,
     marginBottom: 20,

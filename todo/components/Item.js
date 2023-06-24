@@ -1,13 +1,15 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { StyleSheet, Text, View, Pressable } from "react-native";
 
 export default function Item(props) {
   return (
     <View style={styles.listItens}>
-      <Text style={styles.listText}>{props.text}</Text>
+      <Pressable
+        android_ripple={{ color: "#8c7bcc" }}
+        onPress={() => props.onDeleteItem(props.id)}
+        style={({ pressed }) => pressed && styles.pressedItem}
+      >
+        <Text style={styles.listText}>{props.text}</Text>
+      </Pressable>
     </View>
   );
 }
@@ -15,7 +17,6 @@ export default function Item(props) {
 const styles = StyleSheet.create({
   listItens: {
     margin: 5,
-    padding: 8,
     borderRadius: 4,
     backgroundColor: "#5e0acc",
     fontSize: 18,
@@ -23,5 +24,10 @@ const styles = StyleSheet.create({
 
   listText: {
     color: "white",
+    padding: 8,
+  },
+
+  pressedItem: {
+    opacity: 0.5,
   },
 });
